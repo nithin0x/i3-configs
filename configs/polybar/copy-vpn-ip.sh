@@ -1,11 +1,16 @@
 #!/bin/bash
 set -eu
 
-ip=$(ip -4 addr show tun0 2>/dev/null | awk '/inet / {print $2; exit}')
+# Auto-detect common VPN interfaces
+ip=""
+for iface in tun0 wg0 vpn0 tap0; do
+  ip=$(ip -4 addr show "$iface" 2>/dev/null | awk '/inet / {print $2; exit}')
+  [ -n "$ip" ] && break
+done
 
 if [ -z "$ip" ]; then
   if command -v notify-send >/dev/null 2>&1; then
-    notify-send "VPN IP" "tun0 is down"
+    notify-send "VPN IP" "VPN is down"
   fi
   exit 0
 fi

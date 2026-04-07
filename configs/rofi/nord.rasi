@@ -39,6 +39,7 @@ window {
 }
 
 mainbox {
+  background-color: inherit;
   spacing: @spacing;
   children: [ "inputbar", "message", "listview", "mode-switcher" ];
 }
@@ -52,11 +53,12 @@ inputbar {
 }
 
 prompt {
+  background-color: inherit;
   text-color: @active;
-  str: "nord";
 }
 
 entry {
+  background-color: inherit;
   text-color: @foreground;
   placeholder: "Launch, switch, or search";
   placeholder-color: @foreground-muted;
@@ -71,7 +73,7 @@ listview {
   columns: 1;
   dynamic: true;
   fixed-height: false;
-  background-color: transparent;
+  background-color: inherit;
   spacing: 8px;
   scrollbar: false;
 }
@@ -79,13 +81,30 @@ listview {
 element {
   border-radius: 12px;
   padding: 10px 12px;
-  background-color: transparent;
+  background-color: @background;
   text-color: @foreground;
 }
 
 element normal.normal {
-  background-color: transparent;
+  background-color: @background;
   text-color: @foreground;
+}
+
+element alternate.normal {
+  background-color: @background;
+  text-color: @foreground;
+}
+
+element normal.active,
+element alternate.active {
+  background-color: @background;
+  text-color: @active;
+}
+
+element normal.urgent,
+element alternate.urgent {
+  background-color: @background;
+  text-color: @urgent;
 }
 
 element selected.normal {
@@ -116,7 +135,7 @@ element-icon {
 }
 
 mode-switcher {
-  background-color: transparent;
+  background-color: inherit;
   spacing: 8px;
 }
 

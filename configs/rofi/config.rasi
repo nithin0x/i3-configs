@@ -1,5 +1,5 @@
 configuration {
-  modi: "drun,run,window";
+  modes: "drun,run,window";
   show-icons: true;
   drun-display-format: "{name}";
   display-drun: "Apps";
@@ -8,11 +8,8 @@ configuration {
   font: "JetBrains Mono 11";
   icon-theme: "Flat-Remix-Blue-Dark";
   matching: "fuzzy";
-  sorting-method: "fzf";
   terminal: "alacritty";
   location: 0;
-  sidebar-mode: true;
-  disable-history: false;
   hover-select: true;
 }
 

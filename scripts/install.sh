@@ -139,8 +139,10 @@ install_packages() {
     pavucontrol \
     thunar \
     network-manager-gnome \
-    policykit-1-gnome \
-    xclip
+    lxpolkit \
+    xclip \
+    dunst \
+    libnotify-bin
 }
 
 install_obsidian() {
@@ -264,7 +266,7 @@ install_firefox_theme() {
 }
 
 reload_session() {
-  local wallpaper="$HOME/Pictures/wallpapers/nord-hack-site.png"
+  local wallpaper="$HOME/Pictures/wallpapers/nord-mountains.png"
 
   log "Refreshing wallpaper and live session."
 
@@ -305,11 +307,13 @@ install_dir "$CONFIG_ROOT/rofi" "$HOME/.config/rofi"
 install_dir "$CONFIG_ROOT/gtk-3.0" "$HOME/.config/gtk-3.0"
 install_dir "$CONFIG_ROOT/gtk-4.0" "$HOME/.config/gtk-4.0"
 install_dir "$CONFIG_ROOT/tmux" "$HOME/.config/tmux"
+install_dir "$CONFIG_ROOT/picom" "$HOME/.config/picom"
+install_dir "$CONFIG_ROOT/dunst" "$HOME/.config/dunst"
 install_dir "$ASSET_ROOT/themes/Nordic" "$HOME/.themes/Nordic"
 
 install_file "$CONFIG_ROOT/.tmux.conf" "$HOME/.tmux.conf"
 install_file "$CONFIG_ROOT/.gtkrc-2.0" "$HOME/.gtkrc-2.0"
-install_file "$ASSET_ROOT/wallpapers/nord-hack-site.png" "$HOME/Pictures/wallpapers/nord-hack-site.png"
+install_file "$ASSET_ROOT/wallpapers/nord-mountains.png" "$HOME/Pictures/wallpapers/nord-mountains.png"
 
 chmod +x "$HOME/.config/polybar/"*.sh
 

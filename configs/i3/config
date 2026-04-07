@@ -13,6 +13,7 @@ font pango:JetBrains Mono 10
 # ============================================================
 set $bg         #3b4252
 set $bg_dark    #2e3440
+set $lock_color 2e3440
 set $bg_hl      #434c5e
 set $fg         #eceff4
 set $fg_dark    #e5e9f0
@@ -128,6 +129,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+c focus child
+bindsym $mod+y sticky toggle
 
 # ============================================================
 # WORKSPACES
@@ -167,6 +169,8 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+workspace_auto_back_and_forth yes
+
 # ============================================================
 # WORKSPACE ASSIGNMENTS
 # ============================================================
@@ -188,7 +192,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
 
 # Lock
-bindsym $mod+x exec --no-startup-id i3lock -c 2e3440
+bindsym $mod+x exec --no-startup-id i3lock -c $lock_color
 
 # ============================================================
 # RESIZE MODE
@@ -233,9 +237,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 # ============================================================
 exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/nord-hack-site.png
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/nord-mountains.png
 exec_always --no-startup-id killall picom; picom --config ~/.config/picom/picom.conf -b
 exec --no-startup-id flameshot
+exec --no-startup-id dunst
 
 # System Applets & Services
 exec --no-startup-id nm-applet

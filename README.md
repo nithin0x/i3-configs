@@ -1,23 +1,30 @@
-# Nord i3 for Kali
-A Nord-themed i3 desktop setup built around the config currently running on my `Kali` VM. It includes i3, Polybar, Alacritty, Rofi, tmux, GTK 2/3/4, Firefox tweaks, Obsidian reference config, the `Nordic` GTK theme, and a custom wallpaper inspired by my activities at `nithin0x.space`.
+# nithin0x Nord i3 Dotfiles
+
+A Nord-themed i3 desktop environment for KVM/QEMU VMs. Includes i3, Polybar (Nerd Font icons), Alacritty, Rofi, tmux, picom, dunst, GTK 2/3/4, Firefox tweaks, and the Nordic GTK theme.
 
 ## Preview
 
 ![Desktop](assets/screenshots/desktop.png)
 
-![Wallpaper](assets/wallpapers/nord-hack-site.png)
+![Rofi Launcher](assets/screenshots/rofi.png)
+
+![Power Menu](assets/screenshots/power.png)
+
+![Notification](assets/screenshots/terminal.png)
 
 ## Included
 
-- `i3wm` with Nord colors and wallpaper startup
-- `Polybar` with focused window title only, no `APP` prefix
-- `Alacritty` Nord palette
-- `Rofi` Nord launcher theme
-- `tmux` Nord statusline
-- `GTK 2/3/4` configured for `Nordic`
-- `Firefox` `userChrome.css`, `user.js`, and Papirus icon theme
-- `Obsidian` exported app config
-- Custom Nord hacking wallpaper based on my `nithin0x.space` site
+- `i3wm` — Nord colors, vim-style navigation, workspace auto-back-and-forth
+- `Polybar` — Nerd Font icons, VPN/ETH/disk/CPU/RAM/clock modules, rofi brand launcher, power menu
+- `Alacritty` — Nord palette, JetBrains Mono 7.5pt
+- `Rofi` — Nord theme, drun/run/window modes, rofi 2.0 compatible
+- `tmux` — Nord statusline, Ctrl+Space prefix, vi copy mode
+- `picom` — VM-safe xrender backend, fade effects, no shadows/blur
+- `dunst` — Nord notification daemon, JetBrains Mono
+- `GTK 2/3/4` — Nordic theme
+- `Firefox` — userChrome.css, user.js, Papirus icons
+- `Obsidian` — exported app config (opt-in, machine-specific)
+- Nord mountain wallpaper (3840x2160)
 
 ## Layout
 
@@ -25,15 +32,17 @@ A Nord-themed i3 desktop setup built around the config currently running on my `
 .
 ├── assets
 │   ├── screenshots
-│   ├── themes
+│   ├── themes/Nordic
 │   └── wallpapers
 ├── configs
 │   ├── alacritty
+│   ├── dunst
 │   ├── firefox
 │   ├── gtk-3.0
 │   ├── gtk-4.0
 │   ├── i3
 │   ├── obsidian
+│   ├── picom
 │   ├── polybar
 │   ├── rofi
 │   └── tmux
@@ -42,24 +51,70 @@ A Nord-themed i3 desktop setup built around the config currently running on my `
 
 ## Install
 
-Run the installer from the repo root:
-
 ```bash
+# Configs only (backs up existing files automatically)
 ./scripts/install.sh
-```
 
-Optional flags:
-
-```bash
+# Install system packages first (apt-based)
 ./scripts/install.sh --install-packages
-./scripts/install.sh --install-obsidian
-./scripts/install.sh --apply-obsidian-config
-./scripts/install.sh --skip-reload
+
+# All flags
+./scripts/install.sh --install-packages        # apt install dependencies
+./scripts/install.sh --install-obsidian        # download latest Obsidian .deb
+./scripts/install.sh --apply-obsidian-config   # copy obsidian.json (machine-specific)
+./scripts/install.sh --skip-reload             # don't reload i3/polybar/tmux
 ```
 
-## Notes
+Backups are saved to `~/.config-backups/i3configs-repo-YYYYMMDD-HHMMSS/`.
 
-- The installer creates a timestamped backup under `~/.config-backups/i3configs-repo-*` before replacing files.
-- Firefox files are installed into the detected default profile from `~/.mozilla/firefox/profiles.ini`.
-- The exported Obsidian config includes a machine-specific vault path, so it is not applied unless `--apply-obsidian-config` is passed.
-- The current Polybar window module intentionally keeps the focused window title while removing the old `APP` label.
+## Keybindings
+
+| Key | Action |
+|-----|--------|
+| `Super+Return` | Alacritty terminal |
+| `Super+d` | Rofi app launcher |
+| `Super+Shift+d` | Rofi run prompt |
+| `Super+b` | Firefox |
+| `Super+n` | Thunar |
+| `Super+o` | Obsidian |
+| `Super+q` | Kill window |
+| `Super+h/j/k/l` | Focus left/down/up/right |
+| `Super+Shift+h/j/k/l` | Move window |
+| `Super+f` | Fullscreen |
+| `Super+v` | Split vertical |
+| `Super+g` | Split horizontal |
+| `Super+Shift+space` | Toggle floating |
+| `Super+y` | Toggle sticky window |
+| `Super+x` | Lock screen (i3lock) |
+| `Super+z` | Resize mode |
+| `Super+[1-0]` | Switch workspace (auto-back-and-forth) |
+| `Print` / `Super+Shift+s` | Screenshot (flameshot) |
+
+## Polybar Modules
+
+Click actions on all modules:
+
+| Module | Left Click | Right Click |
+|--------|-----------|-------------|
+| Tessa (brand) | Rofi app launcher | Rofi window switcher |
+| VPN | Copy VPN IP | Network settings |
+| ETH | Network settings | Copy local IP |
+| DSK/CPU/RAM | System monitor | — |
+| Date | Calendar | — |
+| Power | Lock/Logout/Suspend/Restart/Shutdown | — |
+
+## Troubleshooting
+
+**Targeted at KVM/QEMU VMs** — xrandr autostart uses `Virtual-1` at `1920x1080`. Change the resolution in `configs/i3/config` to match your VM display.
+
+**Nerd Font icons missing** — install JetBrainsMono Nerd Font: download from [nerd-fonts releases](https://github.com/ryanoasis/nerd-fonts/releases), extract to `~/.local/share/fonts/`, run `fc-cache -f`.
+
+**Polybar not starting** — ensure `polybar` is in `$PATH` and scripts are executable: `chmod +x ~/.config/polybar/*.sh`.
+
+**picom tearing in VM** — the config uses `xrender` backend with vsync disabled. If issues persist, comment out `exec_always picom` in `configs/i3/config`.
+
+**VPN shows "down"** — the script auto-detects `tun0`, `wg0`, `vpn0`, `tap0`. Add your interface to the loop in `configs/polybar/vpn-status.sh`.
+
+**Rofi colors wrong** — requires rofi 2.0+. The theme uses `inherit` instead of `transparent` for proper color cascading.
+
+**No notifications** — `dunst` is autostarted by i3. Test with `notify-send "test" "hello"`. Requires `libnotify-bin`.
