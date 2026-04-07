@@ -1,6 +1,5 @@
-# nithin0x Nord i3 Dotfiles
-
-A Nord-themed i3 desktop setup built around the config currently running on my `igris` VM. It includes i3, Polybar, Alacritty, Rofi, tmux, GTK 2/3/4, Firefox tweaks, Obsidian reference config, the `Nordic` GTK theme, and a custom wallpaper inspired by my activities at `nithin0x.space`.
+# Nord i3 for Kali
+A Nord-themed i3 desktop setup built around the config currently running on my `Kali` VM. It includes i3, Polybar, Alacritty, Rofi, tmux, GTK 2/3/4, Firefox tweaks, Obsidian reference config, the `Nordic` GTK theme, and a custom wallpaper inspired by my activities at `nithin0x.space`.
 
 ## Preview
 
