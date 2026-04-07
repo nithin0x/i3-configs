@@ -1,0 +1,6 @@
+*.log
+*.swp
+*.swo
+.DS_Store
+
+configs/firefox/firefox-papirus-icon-theme/.git/

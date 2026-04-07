@@ -1,0 +1,242 @@
+# i3 config - Nord Theme
+# Super key as modifier, vim-style navigation
+
+set $mod Mod4
+
+# ============================================================
+# FONTS
+# ============================================================
+font pango:JetBrains Mono 10
+
+# ============================================================
+# NORD COLORS
+# ============================================================
+set $bg         #3b4252
+set $bg_dark    #2e3440
+set $bg_hl      #434c5e
+set $fg         #eceff4
+set $fg_dark    #e5e9f0
+set $blue       #81a1c1
+set $cyan       #88c0d0
+set $magenta    #b48ead
+set $green      #a3be8c
+set $yellow     #ebcb8b
+set $red        #bf616a
+set $orange     #d08770
+set $comment    #4c566a
+
+# ============================================================
+# WINDOW COLORS - Nord
+# ============================================================
+#                       border      background  text        indicator   child_border
+client.focused          $blue       $blue       $bg_dark    $cyan       $blue
+client.focused_inactive $bg_hl      $bg         $fg_dark    $bg_hl      $bg_hl
+client.unfocused        $bg_dark    $bg_dark    $comment    $bg_dark    $bg_dark
+client.urgent           $red        $red        $bg_dark    $red        $red
+client.placeholder      $bg_dark    $bg_dark    $fg         $bg_dark    $bg_dark
+client.background       $bg
+
+# ============================================================
+# GAPS & BORDERS - Nord style
+# ============================================================
+gaps inner 0
+gaps outer 0
+smart_gaps on
+smart_borders on
+
+default_border pixel 0
+default_floating_border pixel 1
+hide_edge_borders none
+
+# ============================================================
+# WINDOW RULES
+# ============================================================
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="feh"] floating enable
+
+# ============================================================
+# MOUSE
+# ============================================================
+floating_modifier $mod
+
+# ============================================================
+# APPLICATION KEYBINDINGS
+# ============================================================
+# Terminal
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Shift+Return exec --no-startup-id terminator
+
+# Kill window
+bindsym $mod+q kill
+bindsym $mod+Shift+q kill
+
+# App launcher
+bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/config.rasi
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run -config ~/.config/rofi/config.rasi
+
+# Quick launch apps
+bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+n exec --no-startup-id thunar
+bindsym $mod+o exec --no-startup-id obsidian
+
+# Screenshots
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+bindsym $mod+Print exec --no-startup-id flameshot full -c
+
+# ============================================================
+# FOCUS - Vim style (hjkl)
+# ============================================================
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# ============================================================
+# MOVE WINDOWS - Vim style
+# ============================================================
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# ============================================================
+# LAYOUT
+# ============================================================
+bindsym $mod+g split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+c focus child
+
+# ============================================================
+# WORKSPACES
+# ============================================================
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ============================================================
+# WORKSPACE ASSIGNMENTS
+# ============================================================
+assign [class="firefox"] $ws1
+assign [class="Thunar"] $ws2
+assign [class="obsidian"] $ws3
+
+# ============================================================
+# SCRATCHPAD
+# ============================================================
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# ============================================================
+# I3 CONTROL
+# ============================================================
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
+
+# Lock
+bindsym $mod+x exec --no-startup-id i3lock -c 2e3440
+
+# ============================================================
+# RESIZE MODE
+# ============================================================
+mode "resize" {
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
+
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+z mode "default"
+}
+bindsym $mod+z mode "resize"
+
+# ============================================================
+# MEDIA, VOLUME & BRIGHTNESS CONTROL
+# ============================================================
+# Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Media playback
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# ============================================================
+# AUTOSTART
+# ============================================================
+exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/nord-hack-site.png
+exec_always --no-startup-id killall picom; picom --config ~/.config/picom/picom.conf -b
+exec --no-startup-id flameshot
+
+# System Applets & Services
+exec --no-startup-id nm-applet
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 || lxpolkit

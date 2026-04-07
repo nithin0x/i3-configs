@@ -1,0 +1,25 @@
+general.import = [ "~/.config/alacritty/theme.toml" ]
+
+[env]
+TERM = "xterm-256color"
+
+[terminal]
+osc52 = "CopyPaste"
+
+[font]
+normal = { family = "JetBrains Mono", style = "Regular" }
+bold = { family = "JetBrains Mono", style = "Bold" }
+italic = { family = "JetBrains Mono", style = "Italic" }
+size = 7.5
+
+[window]
+padding.x = 10
+padding.y = 10
+decorations = "None"
+
+[keyboard]
+bindings = [
+{ key = "Insert", mods = "Shift", action = "Paste" },
+{ key = "Insert", mods = "Control", action = "Copy" },
+{ key = "Return", mods = "Shift", chars = "\u001B\r" }
+]

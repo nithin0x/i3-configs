@@ -1,0 +1,19 @@
+configuration {
+  modi: "drun,run,window";
+  show-icons: true;
+  drun-display-format: "{name}";
+  display-drun: "Apps";
+  display-run: "Run";
+  display-window: "Windows";
+  font: "JetBrains Mono 11";
+  icon-theme: "Flat-Remix-Blue-Dark";
+  matching: "fuzzy";
+  sorting-method: "fzf";
+  terminal: "alacritty";
+  location: 0;
+  sidebar-mode: true;
+  disable-history: false;
+  hover-select: true;
+}
+
+@theme "~/.config/rofi/nord.rasi"

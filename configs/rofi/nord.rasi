@@ -1,0 +1,133 @@
+* {
+  nord0: #2e3440;
+  nord1: #3b4252;
+  nord2: #434c5e;
+  nord3: #4c566a;
+  nord4: #d8dee9;
+  nord5: #e5e9f0;
+  nord6: #eceff4;
+  frost0: #8fbcbb;
+  frost1: #88c0d0;
+  frost2: #81a1c1;
+  frost3: #5e81ac;
+  aurora0: #bf616a;
+  aurora1: #ebcb8b;
+
+  background: @nord0;
+  background-alt: @nord1;
+  foreground: @nord6;
+  foreground-muted: @nord3;
+  selected: @frost2;
+  active: @frost1;
+  urgent: @aurora0;
+  border: @frost3;
+
+  spacing: 10px;
+  radius: 14px;
+}
+
+window {
+  width: 42%;
+  location: north;
+  anchor: north;
+  y-offset: 32px;
+  border: 2px;
+  border-color: @border;
+  border-radius: @radius;
+  background-color: @background;
+  padding: 18px;
+}
+
+mainbox {
+  spacing: @spacing;
+  children: [ "inputbar", "message", "listview", "mode-switcher" ];
+}
+
+inputbar {
+  background-color: @background-alt;
+  border-radius: @radius;
+  padding: 12px 14px;
+  spacing: 10px;
+  children: [ "prompt", "entry" ];
+}
+
+prompt {
+  text-color: @active;
+  str: "nord";
+}
+
+entry {
+  text-color: @foreground;
+  placeholder: "Launch, switch, or search";
+  placeholder-color: @foreground-muted;
+}
+
+message {
+  enabled: false;
+}
+
+listview {
+  lines: 8;
+  columns: 1;
+  dynamic: true;
+  fixed-height: false;
+  background-color: transparent;
+  spacing: 8px;
+  scrollbar: false;
+}
+
+element {
+  border-radius: 12px;
+  padding: 10px 12px;
+  background-color: transparent;
+  text-color: @foreground;
+}
+
+element normal.normal {
+  background-color: transparent;
+  text-color: @foreground;
+}
+
+element selected.normal {
+  background-color: @selected;
+  text-color: @background;
+}
+
+element selected.active {
+  background-color: @active;
+  text-color: @background;
+}
+
+element selected.urgent {
+  background-color: @urgent;
+  text-color: @foreground;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 1.1em;
+  background-color: inherit;
+  text-color: inherit;
+}
+
+mode-switcher {
+  background-color: transparent;
+  spacing: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background-color: @background-alt;
+  text-color: @foreground-muted;
+}
+
+button selected {
+  background-color: @frost0;
+  text-color: @background;
+}
