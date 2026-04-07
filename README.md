@@ -4,8 +4,6 @@ A Nord-themed i3 desktop environment for KVM/QEMU VMs. Includes i3, Polybar (Ner
 
 ## Preview
 
-![Desktop](assets/screenshots/desktop.png)
-
 ![Rofi Launcher](assets/screenshots/rofi.png)
 
 ![Power Menu](assets/screenshots/power.png)
