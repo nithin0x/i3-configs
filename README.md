@@ -1,4 +1,4 @@
-# nithin0x Nord i3 Dotfiles
+# Nord i3 Dotfiles
 
 A Nord-themed i3 desktop environment for KVM/QEMU VMs. Includes i3, Polybar (Nerd Font icons), Alacritty, Rofi, tmux, picom, dunst, GTK 2/3/4, Firefox tweaks, and the Nordic GTK theme.
 
